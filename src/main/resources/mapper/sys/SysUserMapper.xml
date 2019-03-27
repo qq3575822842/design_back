@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyse.design.mapper.sys.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.zyse.design.pojo.sys.SysUser" >
+    <id column="user_key" property="userKey" jdbcType="VARCHAR" />
+    <result column="user_role" property="userRole" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_login" property="userLogin" jdbcType="VARCHAR" />
+    <result column="user_pasword" property="userPasword" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_key, user_role, user_name, user_login, user_pasword, user_phone, create_time
+  </sql>
+
+  <select id="selectByUser" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_user
+    where user_login = #{userLogin,jdbcType=VARCHAR}
+    and  user_pasword = #{userPasword,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByLogin" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from t_sys_user
+    where user_login = #{userLogin,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_sys_user
+    where user_key = #{userKey,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.zyse.design.pojo.sys.SysUser" >
+    insert into t_sys_user (user_key, user_role, user_name, 
+      user_login, user_pasword, user_phone, 
+      create_time)
+    values (#{userKey,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userLogin,jdbcType=VARCHAR}, #{userPasword,jdbcType=VARCHAR}, #{userPhone,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSysUser" parameterType="com.zyse.design.pojo.sys.SysUser" >
+    insert into t_sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userKey != null" >
+        user_key,
+      </if>
+      <if test="userRole != null" >
+        user_role,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userLogin != null" >
+        user_login,
+      </if>
+      <if test="userPasword != null" >
+        user_pasword,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userKey != null" >
+        #{userKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        #{userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null" >
+        #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasword != null" >
+        #{userPasword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyse.design.pojo.sys.SysUser" >
+    update t_sys_user
+    <set >
+      <if test="userRole != null" >
+        user_role = #{userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null" >
+        user_login = #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="userPasword != null" >
+        user_pasword = #{userPasword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_key = #{userKey,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.zyse.design.pojo.sys.SysUser" >
+    update t_sys_user
+    set user_role = #{userRole,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_login = #{userLogin,jdbcType=VARCHAR},
+      user_pasword = #{userPasword,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where user_key = #{userKey,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

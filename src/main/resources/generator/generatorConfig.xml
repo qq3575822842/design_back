@@ -14,27 +14,27 @@
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection  driverClass="com.mysql.jdbc.Driver"
-                          connectionURL="jdbc:mysql://cayh.donghuajinyun.com:3306/cayh_ebank"
-                          userId="ebank"
-                          password="3edcvfr$">
+                          connectionURL="jdbc:mysql://localhost:3306/zysj_back"
+                          userId="root"
+                          password="1993">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.dhcc.manage_back.pojo.wechat" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.zyse.design.pojo.sys" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="mapper.wechat" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapper.SysUser" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dhcc.manage_back.mapper.wechat" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zyse.design.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="t_wechat_openid_org" domainObjectName="WechatOpenidOrg" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="t_sys_user" domainObjectName="SysUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>
