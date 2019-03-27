@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="1800">
+
+    <!-- 自定义属性 -->
+    <properties>
+        <!-- 日志格式 -->
+        <Property name="pattern">%d{yyyy-MM-dd HH:mm:ss,SSS} (%F:%L) %5p %m%n</Property>
+        <!-- 日志文件路径 -->
+        <!--  <Property name="filePath">D:/Tomcat 6.0/log4j/equipmentLease/</Property> -->
+        <!-- debug级别日志文件名称 -->
+        <!--<Property name="debugFileName">${filePath}/debug.log</Property>-->
+        <!-- info级别日志文件名称 -->
+        <!--<Property name="infoFileName">${filePath}/info.log</Property>-->
+        <!-- error级别日志文件名称 -->
+        <!--<Property name="errorFileName">${filePath}/error.log</Property>-->
+    </properties>
+
+    <!-- 定义输出器 -->
+    <appenders>
+
+        <!-- 按天第天备份一个日志 -->
+        <RollingFile name="Struts2" fileName="d:/logs/logss.log"
+                     filePattern="d:/logs/logs_%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout pattern="%d %p %c %L %m%n"/>
+            <Policies>
+                <!-- 每24小时更新一次 -->
+                <TimeBasedTriggeringPolicy modulate="true"
+                                           interval="24"/>
+                <SizeBasedTriggeringPolicy size="128KB"/>
+            </Policies>
+            <!-- 最多备份10个 -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用-->
+        <!-- 控制台输出 -->
+        <Console name="consolePrint" target="SYSTEM_OUT">
+            <!-- 日志格式 -->
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <!-- 将日志输出到指定文件 fileName属性值为日志文件地址-->
+            
+        <File name="LogFile" fileName="D:\log\files.log" append="true">
+
+                  
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %class{36} %L %M - %msg%xEx%n"/>
+
+                
+        </File>
+        <!-- 将sql日志输出到指定文件 fileName属性值为日志文件地址-->
+            
+        <File name="SqlLogFile" fileName="D:\log\sqls.log" append="true">
+
+                  
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %class{36} %L %M - %msg%xEx%n"/>
+
+                
+        </File>
+    </appenders>
+
+    <!-- 定义logger -->
+    <loggers>
+        <!-- sql打印到文件中和控制台中 需要改的地方-->
+        <logger name="com.zyse.design.mapper" level="DEBUG" additivity="false">
+
+            <appender-ref ref="SqlLogFile"/>
+            <appender-ref ref="consolePrint"/>
+
+        </logger>
+        <!--信息存到文件中 需要改的地方-->
+        <logger name="com.zyse.design.controller" level="INFO" additivity="true">
+
+            <appender-ref ref="LogFile"/>
+
+        </logger>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <Logger name="org.springframework" level="INFO"/>
+        <Logger name="org.mybatis" level="INFO"/>
+        <!-- 定义根logger -->
+        <!-- 日志级别设备为debug 具体日志级别由appender限制 -->
+        <root level="info">
+            <appender-ref ref="consolePrint"/>
+            <AppenderRef ref="Struts2"></AppenderRef>
+        </root>
+
+    </loggers>
+</Configuration>
