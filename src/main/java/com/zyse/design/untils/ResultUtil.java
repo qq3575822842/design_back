@@ -1,5 +1,7 @@
 package com.zyse.design.untils;
 
+import com.zyse.design.system.enums.ResultStatusCode;
+
 /**
  * 进行封装页面请求返回结果
  * @description: 功能描述
@@ -7,93 +9,54 @@ package com.zyse.design.untils;
  * @Date: 2018/11/30 16:47
  */
 public  class ResultUtil {
-
     /**
-     状态码
+     * 返回的代码，0表示成功，其他表示失败
      */
-    private Integer code;
+    private int code;
     /**
-     * 状态
+     * 成功或失败时返回的错误信息
      */
-    private Boolean isSuccess;
+    private String msg;
     /**
-     * 成功或者失败消息
+     * 成功时返回的数据信息
+     *
      */
-    private String massege;
-    /**
-     * 数据对象
-     */
-    private Object result;
-    /**
-     * 构造无参方法
-     */
-    public ResultUtil() {
-    }
-
-    /**
-     * 只返回状态，状态码
-     * @param code 0:成功 1:成功但是没数据  -1失败
-     * @param isSuccess 状态码
-     */
-    public ResultUtil(Integer code, Boolean isSuccess, String massege) {
+    private Object data;
+    public ResultUtil(int code, String msg, Object data){
         this.code = code;
-        this.isSuccess = isSuccess;
-        this.massege = massege;
-    }
-    /**
-     * 只返回状态，状态码，数据对象
-     * @param code 0:成功 1:成功但是没数据  -1失败
-     * @param isSuccess 状态码
-     * @param result 数据对象
-     */
-    public ResultUtil(Integer code, Boolean isSuccess, Object result) {
-        this.code = code;
-        this.isSuccess = isSuccess;
-        this.result = result;
+        this.msg = msg;
+        this.data = data;
     }
 
-    /**
-     *返回全部信息即状态，状态码，消息，数据对象
-     * @param code 0:成功 1:成功但是没数据  -1失败
-     * @param isSuccess 状态码
-     * @param massege 成功失败信息
-     * @param result  数据对象
-     */
-    public ResultUtil(Integer code, Boolean isSuccess, String massege, Object result) {
-        this.code = code;
-        this.isSuccess = isSuccess;
-        this.massege = massege;
-        this.result = result;
+    public ResultUtil(ResultStatusCode resultStatusCode, Object data){
+        this(resultStatusCode.getCode(), resultStatusCode.getMsg(), data);
     }
 
-    public Integer getCode() {
+    public ResultUtil(int code, String msg){
+        this(code, msg, null);
+    }
+
+    public ResultUtil(ResultStatusCode resultStatusCode){
+        this(resultStatusCode, null);
+    }
+
+
+    public int getCode() {
         return code;
     }
-
-    public void setCode(Integer code) {
+    public void setCode(int code) {
         this.code = code;
     }
-
-    public Boolean getSuccess() {
-        return isSuccess;
+    public String getMsg() {
+        return msg;
     }
-    public void setSuccess(Boolean success) {
-        isSuccess = success;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
-
-    public String getMassege() {
-        return massege;
+    public Object getData() {
+        return data;
     }
-
-    public void setMassege(String massege) {
-        this.massege = massege;
-    }
-
-    public Object getResult() {
-        return result;
-    }
-
-    public void setResult(Object result) {
-        this.result = result;
+    public void setData(Object data) {
+        this.data = data;
     }
 }

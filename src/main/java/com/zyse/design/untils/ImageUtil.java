@@ -75,10 +75,10 @@ public class ImageUtil {
             try {
                 file.transferTo(newFile);
                 String name = path + File.separator + newFileName;
-                String result = JSON.toJSONString(new ResultUtil(0, true, "图片上传成功", name));
+                String result = JSON.toJSONString(new ResultUtil(0, "图片上传成功", name));
                 return result;
             } catch (IllegalStateException | IOException e) {
-                String result = JSON.toJSONString(new ResultUtil(-1, false, "图片上传异常"));
+                String result = JSON.toJSONString(new ResultUtil(-1, "图片上传异常"));
                 return result;
             }
         }

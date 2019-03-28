@@ -22,7 +22,7 @@ public interface SysUserService {
      * @Author: yc
      * @date: 2019/3/27 13:01
      */
-    List<SysUser> selectByLogin(SysUser sysUser);
+    SysUser selectByLogin(String name);
 
     /**
      * 用户新的插入
